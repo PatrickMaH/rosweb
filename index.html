@@ -1,136 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<script type="text/javascript" src="jquery/jquery.min-1.10.2.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-
-<script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
-
-<script type="text/javascript" type="text/javascript">
-
-// Connecting to ROS
-// ------------------
-
-var ros = new ROSLIB.Ros({
-	url : 'ws://10.219.21.68:9090'
-});
-
-ros.on('connection', function(){
-	console.log('Connected to websocket server.');
-});
-
-ros.on('error', function(error){
-	console.log('Error connecting to websocket server:', error);
-});
-
-ros.on('close', function(){
-	console.log('Connected to websocket server closed.');
-});
-
-// Publishing a Topic
-// ------------------
-var robot_1_Cmd = new ROSLIB.Topic({
-	ros : ros,
-	name : 'to_robot1_cmd',
-	messageType : 'std_msgs/String'
-});
-
-function forward_1() {
-    var cmd = new ROSLIB.Message({
-    	data : 'forward'
-    });
-    robot_1_Cmd.publish(cmd);
-}
-function back_1() {
-    var cmd = new ROSLIB.Message({
-    	data : 'back'
-    });
-    robot_1_Cmd.publish(cmd);
-}
-function left_1() {
-    var cmd = new ROSLIB.Message({
-    	data : 'left'
-    });
-    robot_1_Cmd.publish(cmd);
-}
-function right_1() {
-    var cmd = new ROSLIB.Message({
-    	data : 'right'
-    });
-    robot_1_Cmd.publish(cmd);
-}
-function navigation_1() {
-    var cmd = new ROSLIB.Message({
-        data : 'navigation'
-    });
-    robot_1_Cmd.publish(cmd);
-}
-function stop_1() {
-    var cmd = new ROSLIB.Message({
-        data : 'stop'
-    });
-    robot_1_Cmd.publish(cmd);
-}
-</script>
-
+</head>
 <body>
-<div style="position:absolute;z-index:-1;width:100%;height:100%;">
-        <img src="Pic/b2.jpg" class="inline" width="100%" height="100%" />
-</div>
-<h1 align="center">Control your turtlebot here!</h1>
-<hr /> 
-<p align="center">
-<img src="Pic/t1.jpg" class="inline" width="300" height="300"/>
-<img src="Pic/t2.jpg" class="inline" width="300" height="300" />
-</p>
-<p align="center">
-<div style="width:200px;height:130px;border:solid 10px #ffaad5;margin: 0 auto;">
-	<div style="width:40px;float:left;margin-top:30px;">
-		<button onclick="left_1()">left</button>
+	<div class="group-from">
+		<h1 align=center>Control your turtlebot here!</h1>
 	</div>
-	<div style="width:140px;float:right;">
-        <div style="width:80px;float:left;margin: 0 auto;">
-		 <div style="width:70px;margin: 0 auto">
-			<button onclick="forward_1()">forward</button>
-         </div>
-			<div style="width:50px;margin: 0 auto">
-				<button onclick="back_1()">back</button>
-				<button onclick="stop_1()">stop</button>
-			</div>
-		</div>
-		<div style="width:40px;float:right;margin-top:30px;">
-				<button onclick="right_1()">right</button>
-		</div>
+	<div class="group-from" align="center">
+		<img src="t1.jpg" width="300" height="300" />
+		<img src="t2.jpg" width="300" height="300" />
 	</div>
-</div>
-<div style="width:200px;height:110px;border:solid 10px #ffaad5;margin: 0 auto;">
-    <div style="width:40px;float:left;margin-top:30px;">
-        <button onclick="left_1()">left</button>
-    </div>
-    <div style="width:140px;float:right;">
-        <div style="width:80px;float:left;margin: 0 auto;">
-         <div style="width:70px;margin: 0 auto">
-            <button onclick="forward_1()">forward</button>
-         </div>
-            <div style="width:50px;margin: 0 auto">
-                <button onclick="back_1()">back</button>
-                <button onclick="stop_1()">stop</button>
-            </div>
-        </div>
-        <div style="width:40px;float:right;margin-top:30px;">
-                <button onclick="right_1()">right</button>
-        </div>
-    </div>
-</div>
-</p>
-<p align="center">
-    <h2 align="center">Radio Buttons</h2>
-    <form align="center">
-        <input type="radio" name="gender" value="male" checked> Male<br>
-        <input type="radio" name="gender" value="female" checked> Female<br>
-        <input type="radio" name="gender" value="other" checked> Other<br>
-    </form>
-</p>
+	<div class="group-from" align="center">
+		<button type="button" class="btn btn-default">forward</button>
+	</div>
+	<div class="group-from" align="center">
+		<button type="button" class="btn btn-default">left</button>
+		<button type="button" class="btn btn-default">back</button>
+		<button type="button" class="btn btn-default">right</button>
+	</div>
+	<div class="group-from" align="center">
+		<button type="button" class="btn btn-default">stop</button>
+	</div>
 </body>
 </html>
