@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Voice Control</title>
+<style type="text/css">
+    .head{
+        background-color: #9F35FF;color: white;font-weight: bold;font-size: 50px;
+        text-align: center;padding: 10px;
+    }
+    .content{
+        width: 400px;margin-left: auto;margin-right: auto;
+    }
+    .box{
+        width: 280px;padding: 10px;margin: 10px;background-color: white;
+        display: inline-block;vertical-align: top;
+        text-align: center;height: 100px;line-height: 30px;
+    }
+    .title{font-weight: bold;}
+    @media screen and (max-width: 600px){
+        .head{font-size: 30px}
+        .content{width: 100%;text-align: center;}
+    }
+</style>
+</head>
+
+<script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+
+<script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+
+<script type="text/javascript" type="text/javascript">
+
+// Connecting to ROS
+// ------------------
+
+var ros = new ROSLIB.Ros({
+	url : 'ws://10.219.21.68:9090'
+});
+
+ros.on('connection', function(){
+	console.log('Connected to websocket server.');
+});
+
+ros.on('error', function(error){
+	console.log('Error connecting to websocket server:', error);
+});
+
+ros.on('close', function(){
+	console.log('Connected to websocket server closed.');
+});
+
+// Publishing Topic "mic_label"
+// ------------------
+var mic = new ROSLIB.Topic({
+    ros : ros,
+    name : 'mic_label',
+    messageType : 'std_msgs/String'
+});
+
+function mic(){
+    var mic_used = new ROSLIB.Message({
+        data : 'mic'
+    });
+    mic.publish(mic_used);
+}
+
+</script>
+
+<body style="margin: 0px;background-color: #eeeeee;">
+<div class="head">Voice Control</div>
+    <div class="content">
+    <div class="box">
+        <div class="title">Voice</div>
+        <div>
+            <form>
+                 <input type="radio" name="mic" onclick="mic()" value="mic">MIC<br>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

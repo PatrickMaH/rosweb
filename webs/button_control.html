@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Button Control</title>
+<style type="text/css">
+    .head{
+        background-color: #02C874;color: white;font-weight: bold;font-size: 50px;
+        text-align: center;padding: 10px;
+    }
+    .content{
+        width: 700px;margin-left: auto;margin-right: auto;
+    }
+    .box{
+        width: 280px;padding: 10px;margin: 10px;background-color: white;
+        display: inline-block;vertical-align: top;
+        text-align: center;height: 150px;line-height: 30px;
+    }
+    .title{font-weight: bold;}
+    @media screen and (max-width: 600px){
+        .head{font-size: 30px}
+        .content{width: 100%;text-align: center;}
+    }
+</style>
+</head>
+
+<script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+
+<script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+
+<script type="text/javascript" type="text/javascript">
+
+// Connecting to ROS
+// ------------------
+
+var ros = new ROSLIB.Ros({
+	url : 'ws://10.219.21.68:9090'
+});
+
+ros.on('connection', function(){
+	console.log('Connected to websocket server.');
+});
+
+ros.on('error', function(error){
+	console.log('Error connecting to websocket server:', error);
+});
+
+ros.on('close', function(){
+	console.log('Connected to websocket server closed.');
+});
+
+// Publishing a Topic
+// ------------------
+var robot_1_Cmd = new ROSLIB.Topic({
+	ros : ros,
+	name : 'to_robot1_cmd',
+	messageType : 'std_msgs/String'
+});
+
+function forward_1() {
+    var cmd = new ROSLIB.Message({
+    	data : 'forward'
+    });
+    robot_1_Cmd.publish(cmd);
+}
+function back_1() {
+    var cmd = new ROSLIB.Message({
+    	data : 'back'
+    });
+    robot_1_Cmd.publish(cmd);
+}
+function left_1() {
+    var cmd = new ROSLIB.Message({
+    	data : 'left'
+    });
+    robot_1_Cmd.publish(cmd);
+}
+function right_1() {
+    var cmd = new ROSLIB.Message({
+    	data : 'right'
+    });
+    robot_1_Cmd.publish(cmd);
+}
+function navigation_1() {
+    var cmd = new ROSLIB.Message({
+        data : 'navigation'
+    });
+    robot_1_Cmd.publish(cmd);
+}
+function stop_1() {
+    var cmd = new ROSLIB.Message({
+        data : 'stop'
+    });
+    robot_1_Cmd.publish(cmd);
+}
+</script>
+
+<body style="margin: 0px;background-color: #eeeeee;">
+<div class="head">Button Control</div>
+<div class="content">
+    <div class="box">
+        <div class="title">Robot_1</div>
+         <div style="width:200px;height:110px;margin: 0 auto;">
+          <div style="width:40px;float:left;margin-top:30px;">
+            <button onclick="left_1()">left</button>
+          </div>
+        <div style="width:140px;float:right;">
+         <div style="width:80px;float:left;margin: 0 auto;">
+          <div style="width:70px;margin: 0 auto">
+            <button onclick="forward_1()">forward</button>
+          </div>
+          <div style="width:50px;margin: 0 auto">
+                <button onclick="back_1()">back</button>
+                <button onclick="stop_1()">stop</button>
+          </div>
+        </div>
+         <div style="width:40px;float:right;margin-top:30px;">
+                <button onclick="right_1()">right</button>
+         </div>
+        </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="title">Robot_2</div>
+        <div style="width:200px;height:110px;margin: 0 auto;">
+          <div style="width:40px;float:left;margin-top:30px;">
+            <button onclick="left_1()">left</button>
+          </div>
+        <div style="width:140px;float:right;">
+         <div style="width:80px;float:left;margin: 0 auto;">
+          <div style="width:70px;margin: 0 auto">
+            <button onclick="forward_1()">forward</button>
+          </div>
+          <div style="width:50px;margin: 0 auto">
+                <button onclick="back_1()">back</button>
+                <button onclick="stop_1()">stop</button>
+          </div>
+        </div>
+         <div style="width:40px;float:right;margin-top:30px;">
+                <button onclick="right_1()">right</button>
+         </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>
