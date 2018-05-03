@@ -1,0 +1,13 @@
+<launch>
+
+	<include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+
+	<node pkg="voice" name="voice_listen" type="voice_listener.py"/>
+	<node pkg="voice" name="robot_listen" type="robot_listener.py"/>
+
+	<node name="recognizer" pkg="pocketsphinx" type="recognizer.py">
+	    <param name="lm" value="$(find voice)/voice_cmd.lm"/>
+	    <param name="dict" value="$(find voice)/voice_cmd.dic"/>
+	</node>
+
+</launch>
